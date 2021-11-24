@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.harsh.rxandroid.R
 import com.harsh.rxandroid.StarWarsApp
 import com.harsh.rxandroid.pointsTable.datasource.PlayersRepository
+import com.harsh.rxandroid.pointsTable.datasource.PointsTableUseCase
 import com.harsh.rxandroid.pointsTable.view.adapter.PointsTableAdapter
 
 class PointsTableFragment : Fragment(R.layout.fragment_points_table) {
 
     private val rvPoints: RecyclerView by lazy { requireView().findViewById(R.id.rv_points) }
-    private val playersRepository: PlayersRepository by lazy { (requireActivity().applicationContext as StarWarsApp).playersRepository }
+    private val pointsTableUseCase: PointsTableUseCase by lazy { (requireActivity().applicationContext as StarWarsApp).pointsTableUseCase }
     private val pointsViewModel: PointsTableViewModel by lazy {
-        ViewModelProvider(this, PointsTableViewModelFactory(playersRepository))
+        ViewModelProvider(this, PointsTableViewModelFactory(pointsTableUseCase))
             .get()
     }
 
